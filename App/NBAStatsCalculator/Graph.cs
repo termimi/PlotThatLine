@@ -20,11 +20,21 @@ namespace NBAStatsCalculator
         public int graPosX;
         public int graPosY;
         public string[] days = {"lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche"};
+        
         public Graph(string _name)
         {
             this.name = _name;
         }
-        public void createGraph(Form form, double[] nbPoints, double[] dayOfWeek)
+        public double[] putListValueIntoArray(List<double> liste)
+        {
+            double[] doubleArray = new double[liste.Count];
+            for (int i = 0; i < liste.Count; i++)
+            {
+                doubleArray[i] = liste[i];
+            }
+            return doubleArray;
+        }
+        public void createGraph(Form form, List<double> nbPoints, double[] dayOfWeek)
         {
             // Création du graph
             ScottPlot.WinForms.FormsPlot graph = new ScottPlot.WinForms.FormsPlot();
@@ -43,8 +53,11 @@ namespace NBAStatsCalculator
             graph.Plot.XLabel("Jour de la semaine");
             graph.Plot.YLabel("Nombre de points");
 
+            //Déplacement des valeur de la liste dans un tableau pour le graph
+            double[] nbpointArray = putListValueIntoArray(nbPoints);
+
             // Ajout de la ligne (en utilisant des index pour dayOfWeek)
-            graph.Plot.Add.Scatter(dayOfWeek, nbPoints);
+            graph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
             graph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
 
             // Rafraîchissement et ajout au form
