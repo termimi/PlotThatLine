@@ -28,7 +28,7 @@ namespace NBAStatsCalculator
         public Form1()
         {
             InitializeComponent();
-            Graph graph1 = new Graph("equipe1");
+            Graph graph1 = new Graph();
             AddListOfScore();
             graph1.createGraph(this,listeScore);
 
@@ -47,8 +47,10 @@ namespace NBAStatsCalculator
         }
         public void AddListOfScore()
         {
-            listeScore.Add(nbPoints);
-            listeScore.Add(nbPoints2);
+            Team team1 = new Team("team1", nbPoints);
+            Team team2 = new Team("team2", nbPoints2);
+            listeScore.Add(team1.teamScores);
+            listeScore.Add(team2.teamScores);
         }
 
     }

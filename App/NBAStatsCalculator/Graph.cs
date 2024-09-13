@@ -21,9 +21,9 @@ namespace NBAStatsCalculator
         public int graPosY;
         public string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
 
-        public Graph(string _name)
+        public Graph()
         {
-            this.name = _name;
+            
         }
         public double[] putListValueIntoArray(List<double> liste)
         {
