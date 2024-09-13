@@ -34,7 +34,7 @@ namespace NBAStatsCalculator
             }
             return doubleArray;
         }
-        public void createGraph(Form form, List<double> nbPoints)
+        public void createGraph(Form form, List<List<double>> listeScore)
         {
             // Création du graph
             ScottPlot.WinForms.FormsPlot graph = new ScottPlot.WinForms.FormsPlot();
@@ -55,15 +55,20 @@ namespace NBAStatsCalculator
             graph.Plot.YLabel("Nombre de points");
 
             //Déplacement des valeur de la liste dans un tableau pour le graph
-            double[] nbpointArray = putListValueIntoArray(nbPoints);
-
-            // Ajout de la ligne (en utilisant des index pour dayOfWeek)
-            graph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
-            graph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
-
+            foreach (List<double> list in listeScore)
+            {
+                double[] nbpointArray = putListValueIntoArray(list);
+                createScatter(graph, dayOfWeek, nbpointArray);
+            }
+     
             // Rafraîchissement et ajout au form
             graph.Refresh();
             form.Controls.Add(graph);
+        }
+        public void createScatter(ScottPlot.WinForms.FormsPlot graph,double[] dayOfWeek, double[] nbpointArray)
+        {
+            graph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
+            graph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
         }
 
 

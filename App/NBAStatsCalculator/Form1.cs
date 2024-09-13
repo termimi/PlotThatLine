@@ -12,12 +12,25 @@ namespace NBAStatsCalculator
             75, 
             83
         };
+        public List<double> nbPoints2 = new List<double>
+        {
+            65,
+            70,
+            100,
+            80,
+            86,
+            69,
+            97
+        };
+        public List<List<double>> listeScore = new List<List<double>>();
+        
         public DateTime dateTest = new DateTime(2024, 9, 6);
         public Form1()
         {
             InitializeComponent();
             Graph graph1 = new Graph("equipe1");
-            graph1.createGraph(this,nbPoints);
+            AddListOfScore();
+            graph1.createGraph(this,listeScore);
 
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
         }
@@ -31,6 +44,11 @@ namespace NBAStatsCalculator
             int dayOfWeek = (int)dateOfDay.DayOfWeek;
             return dayOfWeek;
 
+        }
+        public void AddListOfScore()
+        {
+            listeScore.Add(nbPoints);
+            listeScore.Add(nbPoints2);
         }
 
     }
