@@ -7,6 +7,18 @@
       "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\networkrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:networkrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,16 +27,8 @@
       "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,24 +38,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "NetworkRequest.cs",
+              "DocumentMoniker": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\NetworkRequest.cs",
+              "RelativeDocumentMoniker": "NetworkRequest.cs",
+              "ToolTip": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\NetworkRequest.cs",
+              "RelativeToolTip": "NetworkRequest.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAmwCYAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T14:09:07.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Team.cs",
               "DocumentMoniker": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Team.cs",
               "RelativeDocumentMoniker": "Team.cs",
               "ToolTip": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Team.cs",
               "RelativeToolTip": "Team.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAmAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-13T13:39:26.248Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -63,20 +80,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Graph.cs",
               "DocumentMoniker": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Graph.cs",
               "RelativeDocumentMoniker": "Graph.cs",
               "ToolTip": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Graph.cs",
               "RelativeToolTip": "Graph.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAJAAAA",
+              "ViewState": "AQIAACwAAAAAAAAAAAAwwBgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:08:35.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:08:35.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
@@ -95,14 +111,14 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAQwCwAAAAdAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAuwCEAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-06T11:36:39.335Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Conception]",
               "DocumentMoniker": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",

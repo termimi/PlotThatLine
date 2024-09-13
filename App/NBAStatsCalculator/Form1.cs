@@ -22,6 +22,7 @@ namespace NBAStatsCalculator
             69,
             97
         };
+        public List<Team> listOfTeams = new List<Team>();
         public List<List<double>> listeScore = new List<List<double>>();
         
         public DateTime dateTest = new DateTime(2024, 9, 6);
@@ -31,13 +32,12 @@ namespace NBAStatsCalculator
             Graph graph1 = new Graph();
             AddListOfScore();
             graph1.createGraph(this,listeScore);
-
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-
+            await NetworkRequest.GetNbaTeams();
         }
         public int ConvertDateToDayOfWeekNumber(DateTime dateOfDay)
         {
