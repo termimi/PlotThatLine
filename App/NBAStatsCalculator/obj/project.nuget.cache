@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7XFJXkgVE45ouqSfnboDQgGxQCFy1xrZvXXhepGnzkXUWBzz6AhxFsBH/KS1EnojxpVkcYtMl0ugAJ2zvAW1fg==",
+  "dgSpecHash": "sqDcpj7rrJJnmmw/FA3Efm3Y5gvOm2T34aLfiYE2G+cvs8TToAbw6G5yrTwkQUeX0Pzg2RZ7IXhRgTYVO1RJIw==",
   "success": true,
   "projectFilePath": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\NBAStatsCalculator.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\po66qga\\.nuget\\packages\\csvhelper\\33.0.1\\csvhelper.33.0.1.nupkg.sha512",
     "C:\\Users\\po66qga\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.9\\microsoft.netcore.platforms.3.1.9.nupkg.sha512",
     "C:\\Users\\po66qga\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\po66qga\\.nuget\\packages\\opentk\\4.3.0\\opentk.4.3.0.nupkg.sha512",
