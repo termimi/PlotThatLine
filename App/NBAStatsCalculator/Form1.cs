@@ -25,13 +25,14 @@ namespace NBAStatsCalculator
         public List<Team> listOfTeams = new List<Team>();
         public List<List<double>> listeScore = new List<List<double>>();
         public List<string> teamNames = new List<string>();
-        
+        public List<Team> teams = new List<Team>();
         public DateTime dateTest = new DateTime(2024, 9, 6);
         public Form1()
         {
             InitializeComponent();
             Graph graph1 = new Graph();
-            teamNames = DataSelection.getAllTeams();
+            teamNames = DataSelection.getAllTeamsNames();
+            teams = DataSelection.getTeamsStats(teamNames);
             AddListOfScore();
             graph1.createGraph(this,listeScore);
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
