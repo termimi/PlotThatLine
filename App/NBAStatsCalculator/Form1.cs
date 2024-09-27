@@ -35,9 +35,9 @@ namespace NBAStatsCalculator
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await NetworkRequest.GetNbaTeams();
+           
         }
         public int ConvertDateToDayOfWeekNumber(DateTime dateOfDay)
         {
