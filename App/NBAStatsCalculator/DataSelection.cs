@@ -10,7 +10,6 @@ namespace NBAStatsCalculator
 {
     public static class DataSelection
     {
-
         public static List<string> getAllTeamsNames()
         {
             // list contenant toutes les entrée de home même les doublons
@@ -36,6 +35,18 @@ namespace NBAStatsCalculator
         }
         public static List<Team> getTeamsStats(List<string> listOfTeams)
         {
+            var cryptoName = new Dictionary<string, double>()
+            {
+                { "Mon",1},
+                { "Tue",2},
+                { "Wed",3},
+                { "Thu",4},
+                { "Fri",5},
+                { "Sat",6},
+                { "Sun",7}
+                
+            };
+            List<GamesResult> results = new List<GamesResult>();
             string appPath = AppDomain.CurrentDomain.BaseDirectory;
             List<Team> teams = new List<Team>();
             string filePath = Path.Combine(appPath, "TeamData", "TeamBasicData.csv");
@@ -57,7 +68,7 @@ namespace NBAStatsCalculator
                             scoreOfTeam.Add(Convert.ToDouble(record.VPTS));
                         }
                     }
-                    Team team = new Team(teamOfList, scoreOfTeam);
+                    Team team = new Team(teamOfList, results);
                     teams.Add(team);
                 });
             }
