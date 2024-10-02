@@ -31,6 +31,8 @@ namespace NBAStatsCalculator
         {
             InitializeComponent();
             Graph graph1 = new Graph();
+            DataSelection data = new DataSelection("", "", "", 0, "", 0);
+            data.loadFile();
             AddListOfScore();
             graph1.createGraph(this,listeScore);
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
