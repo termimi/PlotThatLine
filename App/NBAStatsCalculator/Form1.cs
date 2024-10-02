@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace NBAStatsCalculator
 {
     public partial class Form1 : Form
@@ -33,6 +35,7 @@ namespace NBAStatsCalculator
             Graph graph1 = new Graph();
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile();
+            Debug.WriteLine(data.list[0]);
             AddListOfScore();
             graph1.createGraph(this,listeScore);
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
