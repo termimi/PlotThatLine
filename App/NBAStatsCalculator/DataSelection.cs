@@ -20,6 +20,7 @@ namespace NBAStatsCalculator
         public int homePoints;
         public List<DataSelection> list = new List<DataSelection>();
 
+        // TODO: refactore pour ne plus utiliser de paramètre dans le constructor
         public DataSelection(string _dateOfGame, string _startOfGame, string _visitorTeam, int _visitorPoints, string _homeTeam, int _homePoints)
         {
             dateOfGame = _dateOfGame;
