@@ -47,17 +47,26 @@ namespace NBAStatsCalculator
                 }
             }
         }
-        public void GetTeamStructure()
+        public List<Team> GetTeamStructure()
         {
             List<Team> teamsData = new List<Team>();
             List<string> teamList = new List<string>();
+            // récupére les 30 équipe NBA
             teamList = list.Select(t => t.homeTeam.ToString()).Distinct().ToList();
             teamList.ForEach(t =>
             {
-
+                Team team = new Team(t);
+                List<(double,double)> listScores = new List<(double,double)>();
+                listScores = list.Where(t => (team.nameOfTeam == t.homeTeam) || (team.nameOfTeam ==t.visitorTeam))
+                .Select(t => ((double)t.homePoints,ConvertStringDateToNumberOfDay(t.dateOfGame)))
+                .ToList();
+                team.teamScores = listScores;
+                teamsData.Add(team);
             });
+            return teamsData;
+            
         }
-        public int ConvertStringDateToNumberOfDay(string date)
+        public double ConvertStringDateToNumberOfDay(string date)
         {
             if (date.StartsWith("Mon"))
             {
