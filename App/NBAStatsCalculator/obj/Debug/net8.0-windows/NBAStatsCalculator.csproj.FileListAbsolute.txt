@@ -99,3 +99,4 @@ C:\Users\belkh\Documents\GitHub\PlotThatLine\App\NBAStatsCalculator\obj\Debug\ne
 C:\Users\belkh\Documents\GitHub\PlotThatLine\App\NBAStatsCalculator\obj\Debug\net8.0-windows\NBAStatsCalculator.pdb
 C:\Users\belkh\Documents\GitHub\PlotThatLine\App\NBAStatsCalculator\obj\Debug\net8.0-windows\NBAStatsCalculator.genruntimeconfig.cache
 C:\Users\belkh\Documents\GitHub\PlotThatLine\App\NBAStatsCalculator\obj\Debug\net8.0-windows\ref\NBAStatsCalculator.dll
+C:\Users\po66qga\Documents\GitHub\PlotThatLine\App\NBAStatsCalculator\bin\Debug\net8.0-windows\Newtonsoft.Json.dll

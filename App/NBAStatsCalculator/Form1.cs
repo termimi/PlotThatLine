@@ -35,7 +35,7 @@ namespace NBAStatsCalculator
             Graph graph1 = new Graph();
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile();
-            Debug.WriteLine(data.list[0]);
+            data.GetTeamStructure();
             AddListOfScore();
             graph1.createGraph(this,listeScore);
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
@@ -53,10 +53,14 @@ namespace NBAStatsCalculator
         }
         public void AddListOfScore()
         {
-            Team team1 = new Team("team1", nbPoints);
-            Team team2 = new Team("team2", nbPoints2);
-            listeScore.Add(team1.teamScores);
-            listeScore.Add(team2.teamScores);
+            List<(List<double>, double numberOfDay)> test = new List<(List<double>, double numberOfDay)> ();
+            List<(List<double>, double numberOfDay)> test2 = new List<(List<double>, double numberOfDay)>();
+            test.Add((nbPoints, 3));
+            test2.Add((nbPoints2, 3));
+            Team team1 = new Team("team1", test);
+            Team team2 = new Team("team2", test2);
+            listeScore.Add(nbPoints);
+            listeScore.Add(nbPoints);
         }
 
     }

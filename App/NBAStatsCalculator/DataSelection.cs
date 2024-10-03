@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,47 @@ namespace NBAStatsCalculator
                     DataSelection dataInList = new DataSelection((string)item.Date, (string)item.Start, (string)item.Visitor, (int)item.VPTS, (string)item.Home, (int)item.HPTS);
                     list.Add(dataInList);
                 }
+            }
+        }
+        public void GetTeamStructure()
+        {
+            List<Team> teamsData = new List<Team>();
+            List<string> teamList = new List<string>();
+            teamList = list.Select(t => t.homeTeam.ToString()).Distinct().ToList();
+            teamList.ForEach(t =>
+            {
+
+            });
+        }
+        public int ConvertStringDateToNumberOfDay(string date)
+        {
+            if (date.StartsWith("Mon"))
+            {
+                return 1;
+            }
+            else if (date.StartsWith("Tue"))
+            {
+                return 2;
+            }
+            else if (date.StartsWith("Wed"))
+            {
+                return 3;
+            }
+            else if (date.StartsWith("Thu"))
+            {
+                return 4;
+            }
+            else if (date.StartsWith("Fri"))
+            {
+                return 5;
+            }
+            else if (date.StartsWith("Sat"))
+            {
+                return 6;
+            }
+            else
+            {
+                return 7;
             }
         }
 

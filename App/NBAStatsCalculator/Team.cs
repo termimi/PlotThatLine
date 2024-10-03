@@ -10,9 +10,9 @@ namespace NBAStatsCalculator
     public class Team
     {
         public string nameOfTeam;
-        public List<double> teamScores;
+        public List<(List<double>, double numberOfDay)> teamScores;
 
-        public Team(string teamName,List<double> scoresOfTeam)
+        public Team(string teamName,List<(List<double>,double numberOfDay)> scoresOfTeam)
         {
             nameOfTeam = teamName;
             teamScores = scoresOfTeam;
