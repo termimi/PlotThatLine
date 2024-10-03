@@ -67,7 +67,23 @@ namespace NBAStatsCalculator
             return teamsData;
             
         }
-        public double ConvertStringDateToNumberOfDay(string date)
+        public List<Team> GetAverageOfAllTeamScore(List<Team> teams)
+        {
+            List<Team> netTeamsData = new List<Team>();
+            List<(double,double)> averageScores = new List<(double,double)>();
+            teams.ForEach(t =>
+            {
+                averageScores = t.teamScores
+                .GroupBy(ts => ts.numberOfDay)
+                .Select(s => (s.Average(ts => ts.score),s.Key))
+                .ToList();
+                Team team = new Team(t.nameOfTeam);
+                team.teamScores = averageScores;
+                netTeamsData.Add(team);
+            });
+            return netTeamsData;
+        }
+        private double ConvertStringDateToNumberOfDay(string date)
         {
             if (date.StartsWith("Mon"))
             {

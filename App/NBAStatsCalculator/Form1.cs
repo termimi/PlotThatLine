@@ -36,6 +36,7 @@ namespace NBAStatsCalculator
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile();
             listOfTeams = data.GetTeamStructure();
+            listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
             AddListOfScore();
             graph1.createGraph(this,listeScore);
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
