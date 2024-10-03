@@ -73,10 +73,12 @@ namespace NBAStatsCalculator
             List<(double,double)> averageScores = new List<(double,double)>();
             teams.ForEach(t =>
             {
+                // s.key est une propriété de groupBy merci ChatGpt (voir doc)
                 averageScores = t.teamScores
                 .GroupBy(ts => ts.numberOfDay)
                 .Select(s => (s.Average(ts => ts.score),s.Key))
                 .ToList();
+
                 Team team = new Team(t.nameOfTeam);
                 team.teamScores = averageScores;
                 netTeamsData.Add(team);
