@@ -59,7 +59,7 @@ namespace NBAStatsCalculator
                 Team team = new Team(t);
                 List<(double,double)> listScores = new List<(double,double)>();
                 listScores = list.Where(t => (team.nameOfTeam == t.homeTeam) || (team.nameOfTeam ==t.visitorTeam))
-                .Select(t => ((double)t.homePoints,ConvertStringDateToNumberOfDay(t.dateOfGame)))
+                .Select(t => (team.nameOfTeam == t.homeTeam ? (double)t.homePoints : (double)t.visitorPoints,ConvertStringDateToNumberOfDay(t.dateOfGame)))
                 .ToList();
                 team.teamScores = listScores;
                 teamsData.Add(team);
