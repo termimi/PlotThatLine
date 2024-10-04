@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+App/NBAStatsCalculator/.vs/NBAStatsCalculator/v17/DocumentLayout.json
+App/NBAStatsCalculator/obj/Debug/net8.0-windows/NBAStatsCalculator.AssemblyInfo.cs
+App/NBAStatsCalculator/obj/Debug/net8.0-windows/NBAStatsCalculator.AssemblyInfoInputs.cache
+App/NBAStatsCalculator/.vs/NBAStatsCalculator/v17/.suo
