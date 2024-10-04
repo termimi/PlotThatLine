@@ -32,13 +32,14 @@ namespace NBAStatsCalculator
         public Form1()
         {
             InitializeComponent();
-            Graph graph1 = new Graph();
+            
+            Graph graph1 = new Graph(this);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile();
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
             AddListOfScore();
-            graph1.createGraph(this,listeScore);
+            graph1.createGraph(this,listOfTeams);
             int daysOfWeek = ConvertDateToDayOfWeekNumber(dateTest);
         }
 
@@ -57,6 +58,7 @@ namespace NBAStatsCalculator
             listeScore.Add(nbPoints);
             listeScore.Add(nbPoints);
         }
+        
 
     }
 }
