@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScottPlot;
 using ScottPlot.Plottables;
+using System.Diagnostics;
 
 namespace NBAStatsCalculator
 {
@@ -19,7 +20,11 @@ namespace NBAStatsCalculator
         public int graTop = 100;
         public int graPosX;
         public int graPosY;
-        
+        private ScottPlot.WinForms.FormsPlot graph = new ScottPlot.WinForms.FormsPlot();
+        private List<Team> globalTeams = new List<Team>();
+        private Form globalForm = new Form();
+        private FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel();
+
 
         public Graph(Form form)
         {
@@ -35,10 +40,29 @@ namespace NBAStatsCalculator
             }
             return doubleArray;
         }
-        public void createGraph(Form form, List<Team> teams)
+        private FlowLayoutPanel CreateFlowLayoutPanel(Form form)
         {
+            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel();
+            //flowLayoutPanel.Dock = DockStyle.Fill;
+            flowLayoutPanel.Top = this.graTop;
+            flowLayoutPanel.Left = this.graLeft + (int)graWidth;
+            //flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel.AutoScroll = true;
+            form.Controls.Add(flowLayoutPanel);
+            return flowLayoutPanel;
+        }
+        public void initializeGraphBasics(Form form, List<Team> teams)
+        {
+            globalForm = form;
+            globalTeams = teams;
+            //Création du flowLayoutPanel
+            flowLayoutPanel = CreateFlowLayoutPanel(globalForm);
+        }
+        public void createGraph(List<Team>teams)
+        {
+            
             // Création du graph
-            ScottPlot.WinForms.FormsPlot graph = new ScottPlot.WinForms.FormsPlot();
+
             // Taille du graph
             graph.Width =  (int)this.graWidth;
             graph.Height = (int)this.graHeight;
@@ -56,20 +80,50 @@ namespace NBAStatsCalculator
             teams.ForEach(t =>
             {
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                createScatter(graph, t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(),t.teamScores.Select(ts => (double)ts.score).ToArray(),t.nameOfTeam);
+                createScatter(graph, t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(),t.teamScores.Select(ts => (double)ts.score).ToArray(),t.nameOfTeam,flowLayoutPanel);
             });
      
             // Rafraîchissement et ajout au form
             graph.Refresh();
-            form.Controls.Add(graph);
+            globalForm.Controls.Add(graph);
         }
-        public void createScatter(ScottPlot.WinForms.FormsPlot graph,double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
+        private void createScatter(ScottPlot.WinForms.FormsPlot graph,double[] dayOfWeek, double[] nbpointArray, string nameOfTeam, FlowLayoutPanel flowLayoutPanel)
         {
             string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
             var scatt = graph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
-            //scatt.LegendText = nameOfTeam;
+            scatt.LegendText = nameOfTeam; 
+            CreateButton(nameOfTeam, flowLayoutPanel);
             graph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
         }
+        private void CreateButton(string nameOfScatter, FlowLayoutPanel flowLayoutPanel)
+        {
+            Button button = new Button();
+            button.Text = nameOfScatter;
+            button.Size = new Size(50, 50);
+            button.Click += new EventHandler(Button_Click);
+
+            flowLayoutPanel.Controls.Add(button);
+        }
+        private void Button_Click(object sender, EventArgs e)
+        {
+            // Convertir le sender en Button
+            Button clickedButton = sender as Button;
+            createGraph(globalTeams);
+            foreach (var s in graph.Plot.GetPlottables())
+            {
+                List<Team> teams = new List<Team>();
+                string scatterLabel = s.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString();
+                if (scatterLabel == clickedButton.Text)
+                {
+                    graph.Plot.Clear();
+                    teams = globalTeams.Where(t => t.nameOfTeam == scatterLabel).Select(t => t).ToList();
+                    createGraph(teams);
+                    initializeGraphBasics(globalForm, globalTeams);
+                    break;
+                }
+            }
+        }
+
 
 
     }

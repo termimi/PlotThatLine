@@ -18,8 +18,8 @@ namespace NBAStatsCalculator
             data.loadFile();
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
-            graph1.createGraph(this, listOfTeams);
-
+            graph1.initializeGraphBasics(this, listOfTeams);
+            graph1.createGraph(listOfTeams);
         }
 
         private void Form1_Load(object sender, EventArgs e)
