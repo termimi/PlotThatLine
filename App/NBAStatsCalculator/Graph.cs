@@ -67,7 +67,7 @@ namespace NBAStatsCalculator
         {
             string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
             var scatt = graph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
-            scatt.Label = nameOfTeam;
+            scatt.LegendText = nameOfTeam;
             graph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
         }
 
