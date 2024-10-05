@@ -24,6 +24,7 @@ namespace NBAStatsCalculator
         private List<Team> globalTeams = new List<Team>();
         private Form globalForm = new Form();
         private FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel();
+        private bool hasGraphChanged = false;
 
 
         public Graph(Form form)
@@ -108,7 +109,12 @@ namespace NBAStatsCalculator
         {
             // Convertir le sender en Button
             Button clickedButton = sender as Button;
-            createGraph(globalTeams);
+            // todo finir le if
+            if (hasGraphChanged || graph.Plot.PlottableList.Select(s => s.LegendItems.Select()))
+            {
+                createGraph(globalTeams);
+                hasGraphChanged = false;
+            }
             foreach (var s in graph.Plot.GetPlottables())
             {
                 List<Team> teams = new List<Team>();
@@ -118,7 +124,7 @@ namespace NBAStatsCalculator
                     graph.Plot.Clear();
                     teams = globalTeams.Where(t => t.nameOfTeam == scatterLabel).Select(t => t).ToList();
                     createGraph(teams);
-                    initializeGraphBasics(globalForm, globalTeams);
+                    hasGraphChanged = true;
                     break;
                 }
             }
