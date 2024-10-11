@@ -109,25 +109,15 @@ namespace NBAStatsCalculator
         {
             // Convertir le sender en Button
             Button clickedButton = sender as Button;
-            // todo finir le if
-            if (hasGraphChanged || graph.Plot.PlottableList.Select(s => s.LegendItems.Select()))
+            graph.Plot.GetPlottables().ToList().ForEach(scatter =>
             {
-                createGraph(globalTeams);
-                hasGraphChanged = false;
-            }
-            foreach (var s in graph.Plot.GetPlottables())
-            {
-                List<Team> teams = new List<Team>();
-                string scatterLabel = s.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString();
-                if (scatterLabel == clickedButton.Text)
+                scatter.IsVisible = false;
+                if(scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == clickedButton.Text)
                 {
-                    graph.Plot.Clear();
-                    teams = globalTeams.Where(t => t.nameOfTeam == scatterLabel).Select(t => t).ToList();
-                    createGraph(teams);
-                    hasGraphChanged = true;
-                    break;
+                    scatter.IsVisible = !scatter.IsVisible;
                 }
-            }
+                graph.Refresh();
+            });
         }
 
 

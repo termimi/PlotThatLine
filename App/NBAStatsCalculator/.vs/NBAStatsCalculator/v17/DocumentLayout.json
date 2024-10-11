@@ -19,7 +19,7 @@
       "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|c:\\users\\po66qga\\documents\\github\\plotthatline\\app\\nbastatscalculator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}|NBAStatsCalculator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -78,8 +78,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T11:36:22.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T11:36:22.059Z"
             },
             {
               "$type": "Document",
@@ -89,7 +88,7 @@
               "RelativeDocumentMoniker": "Graph.cs",
               "ToolTip": "C:\\Users\\po66qga\\Documents\\GitHub\\PlotThatLine\\App\\NBAStatsCalculator\\Graph.cs",
               "RelativeToolTip": "Graph.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAswG4AAAA0AAAAAAAAAA==",
+              "ViewState": "AQIAAGAAAAAAAAAAAAAmwG0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-06T12:08:35.13Z",
               "EditorCaption": ""
@@ -104,8 +103,7 @@
               "RelativeToolTip": "DataSelection.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAwwE8AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T12:01:32.791Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-27T12:01:32.791Z"
             },
             {
               "$type": "Document",
@@ -117,8 +115,7 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAArwA4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T11:51:14.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T11:51:14.929Z"
             },
             {
               "$type": "Document",
@@ -130,8 +127,7 @@
               "RelativeToolTip": "Form1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T11:36:39.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T11:36:39.335Z"
             },
             {
               "$type": "Document",
