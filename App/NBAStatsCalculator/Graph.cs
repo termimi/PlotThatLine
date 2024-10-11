@@ -1,26 +1,15 @@
-﻿using ScottPlot.Colormaps;
-using ScottPlot.WinForms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ScottPlot;
-using ScottPlot.Plottables;
-using System.Diagnostics;
-
-namespace NBAStatsCalculator
+﻿namespace NBAStatsCalculator
 {
     public class Graph
     {
         public string name;
-        public double graWidth ; // 500
+        public double graWidth; // 500
         public double graHeight; //250
         public int graLeft = 100;
         public int graTop = 100;
         public int graPosX;
         public int graPosY;
-        private ScottPlot.WinForms.FormsPlot graph = new ScottPlot.WinForms.FormsPlot();
+        private ScottPlot.WinForms.FormsPlot globalGraph = new ScottPlot.WinForms.FormsPlot();
         private List<Team> globalTeams = new List<Team>();
         private Form globalForm = new Form();
         private FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel();
@@ -29,8 +18,8 @@ namespace NBAStatsCalculator
 
         public Graph(Form form)
         {
-            this.graHeight = form.Height/1.5;
-            this.graWidth = form.Width/1.5;
+            this.graHeight = form.Height / 1.5;
+            this.graWidth = form.Width / 1.5;
         }
         public double[] putListValueIntoArray(List<double> liste)
         {
@@ -52,49 +41,37 @@ namespace NBAStatsCalculator
             form.Controls.Add(flowLayoutPanel);
             return flowLayoutPanel;
         }
-        public void initializeGraphBasics(Form form, List<Team> teams)
+        public void initializeGraphBasics(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph)
         {
             globalForm = form;
             globalTeams = teams;
+            globalGraph = graph;
             //Création du flowLayoutPanel
             flowLayoutPanel = CreateFlowLayoutPanel(globalForm);
         }
-        public void createGraph(List<Team>teams)
+        public void createGraph(List<Team> teams)
         {
-            
-            // Création du graph
-
-            // Taille du graph
-            graph.Width =  (int)this.graWidth;
-            graph.Height = (int)this.graHeight;
-
-            // Position du graph
-            graph.Left = this.graLeft;
-            graph.Top = this.graTop;
-            graPosX = graph.Left;
-            graPosY = graph.Top;
-
             // Label du graph
-            graph.Plot.XLabel("Jour de la semaine");
-            graph.Plot.YLabel("Nombre de points");
+            globalGraph.Plot.XLabel("Jour de la semaine");
+            globalGraph.Plot.YLabel("Nombre de points");
 
             teams.ForEach(t =>
             {
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                createScatter(graph, t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(),t.teamScores.Select(ts => (double)ts.score).ToArray(),t.nameOfTeam,flowLayoutPanel);
+                createScatter(t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Select(ts => (double)ts.score).ToArray(), t.nameOfTeam, flowLayoutPanel);
             });
-     
+
             // Rafraîchissement et ajout au form
-            graph.Refresh();
-            globalForm.Controls.Add(graph);
+            globalGraph.Refresh();
+            globalForm.Controls.Add(globalGraph);
         }
-        private void createScatter(ScottPlot.WinForms.FormsPlot graph,double[] dayOfWeek, double[] nbpointArray, string nameOfTeam, FlowLayoutPanel flowLayoutPanel)
+        private void createScatter(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam, FlowLayoutPanel flowLayoutPanel)
         {
             string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
-            var scatt = graph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
-            scatt.LegendText = nameOfTeam; 
+            var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
+            scatt.LegendText = nameOfTeam;
             CreateButton(nameOfTeam, flowLayoutPanel);
-            graph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
+            globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
         }
         private void CreateButton(string nameOfScatter, FlowLayoutPanel flowLayoutPanel)
         {
@@ -109,14 +86,14 @@ namespace NBAStatsCalculator
         {
             // Convertir le sender en Button
             Button clickedButton = sender as Button;
-            graph.Plot.GetPlottables().ToList().ForEach(scatter =>
+            globalGraph.Plot.GetPlottables().ToList().ForEach(scatter =>
             {
                 scatter.IsVisible = false;
-                if(scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == clickedButton.Text)
+                if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == clickedButton.Text)
                 {
                     scatter.IsVisible = !scatter.IsVisible;
                 }
-                graph.Refresh();
+                globalGraph.Refresh();
             });
         }
 
