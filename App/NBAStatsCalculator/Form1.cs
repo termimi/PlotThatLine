@@ -13,13 +13,11 @@ namespace NBAStatsCalculator
         {
             InitializeComponent();
 
-            Graph graph1 = new Graph(this);
+            Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile();
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
-
-            graph1.initializeGraphBasics(this, listOfTeams,this.mainGraph);
             graph1.createGraph(listOfTeams);
         }
 
@@ -27,8 +25,10 @@ namespace NBAStatsCalculator
         {
 
         }
-        
 
-        
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -12,14 +12,17 @@
         private ScottPlot.WinForms.FormsPlot globalGraph = new ScottPlot.WinForms.FormsPlot();
         private List<Team> globalTeams = new List<Team>();
         private Form globalForm = new Form();
-        private FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel();
+        private FlowLayoutPanel globalFlowLayoutPanel = new FlowLayoutPanel();
         private bool hasGraphChanged = false;
 
 
-        public Graph(Form form)
+        public Graph(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph, FlowLayoutPanel layoutPanel)
         {
-            this.graHeight = form.Height / 1.5;
-            this.graWidth = form.Width / 1.5;
+            this.globalForm = form;
+            this.globalTeams = teams;
+            this.globalGraph = graph;
+            //Création du flowLayoutPanel
+            this.globalFlowLayoutPanel = layoutPanel;
         }
         public double[] putListValueIntoArray(List<double> liste)
         {
@@ -30,25 +33,6 @@
             }
             return doubleArray;
         }
-        private FlowLayoutPanel CreateFlowLayoutPanel(Form form)
-        {
-            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel();
-            //flowLayoutPanel.Dock = DockStyle.Fill;
-            flowLayoutPanel.Top = this.graTop;
-            flowLayoutPanel.Left = this.graLeft + (int)graWidth;
-            //flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel.AutoScroll = true;
-            form.Controls.Add(flowLayoutPanel);
-            return flowLayoutPanel;
-        }
-        public void initializeGraphBasics(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph)
-        {
-            globalForm = form;
-            globalTeams = teams;
-            globalGraph = graph;
-            //Création du flowLayoutPanel
-            flowLayoutPanel = CreateFlowLayoutPanel(globalForm);
-        }
         public void createGraph(List<Team> teams)
         {
             // Label du graph
@@ -58,29 +42,29 @@
             teams.ForEach(t =>
             {
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                createScatter(t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Select(ts => (double)ts.score).ToArray(), t.nameOfTeam, flowLayoutPanel);
+                createScatter(t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Select(ts => (double)ts.score).ToArray(), t.nameOfTeam);
             });
 
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
             globalForm.Controls.Add(globalGraph);
         }
-        private void createScatter(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam, FlowLayoutPanel flowLayoutPanel)
+        private void createScatter(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
         {
             string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
             var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
             scatt.LegendText = nameOfTeam;
-            CreateButton(nameOfTeam, flowLayoutPanel);
+            CreateButton(nameOfTeam);
             globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
         }
-        private void CreateButton(string nameOfScatter, FlowLayoutPanel flowLayoutPanel)
+        private void CreateButton(string nameOfScatter)
         {
             Button button = new Button();
             button.Text = nameOfScatter;
             button.Size = new Size(50, 50);
             button.Click += new EventHandler(Button_Click);
 
-            flowLayoutPanel.Controls.Add(button);
+            globalFlowLayoutPanel.Controls.Add(button);
         }
         private void Button_Click(object sender, EventArgs e)
         {
