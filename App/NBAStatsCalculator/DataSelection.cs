@@ -30,6 +30,9 @@ namespace NBAStatsCalculator
             homePoints = _homePoints;
             visitorPoints = _visitorPoints;
         }
+        /// <summary>
+        /// Lis le contenu du fichier
+        /// </summary>
         public void loadFile()
         {
             /*string appPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -39,9 +42,7 @@ namespace NBAStatsCalculator
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-
                 dynamic data = JsonConvert.DeserializeObject<dynamic>(json);
-                
                 foreach (var item in data)
                 {
                     DataSelection dataInList = new DataSelection((string)item.Date, (string)item.Start, (string)item.Visitor, (int)item.VPTS, (string)item.Home, (int)item.HPTS);
@@ -49,6 +50,10 @@ namespace NBAStatsCalculator
                 }
             }
         }
+        /// <summary>
+        /// Recupère le nom, le score et le jour du match pour chaque match de l'équipe
+        /// </summary>
+        /// <returns>Liste contenant pour chaque équipe le score et la date de tout les matchs de l'équipe</returns>
         public List<Team> GetTeamStructure()
         {
             List<Team> teamsData = new List<Team>();
@@ -66,15 +71,19 @@ namespace NBAStatsCalculator
                 teamsData.Add(team);
             });
             return teamsData;
-            
         }
+        /// <summary>
+        /// Pour chaque équipe fais la moyenne des score marqué en fonction du jour
+        /// </summary>
+        /// <param name="teams">liste des statistique des équipes</param>
+        /// <returns>liste des score moyen des équipes en fonction du jour</returns>
         public List<Team> GetAverageOfAllTeamScore(List<Team> teams)
         {
             List<Team> netTeamsData = new List<Team>();
             List<(double,double)> averageScores = new List<(double,double)>();
             teams.ForEach(t =>
             {
-                // s.key est une propriété de groupBy merci ChatGpt (voir doc)
+                // s.Key représente la valeur par la quelle la liste est groupée
                 averageScores = t.teamScores
                 .GroupBy(ts => ts.numberOfDay)
                 .Select(s => (s.Average(ts => ts.score),s.Key))
@@ -86,6 +95,11 @@ namespace NBAStatsCalculator
             });
             return netTeamsData;
         }
+        /// <summary>
+        /// Donne le numéro du jour de la semaine en fonction de la date du match
+        /// </summary>
+        /// <param name="date">Date du match</param>
+        /// <returns>numéro du jour de la semaine</returns>
         private double ConvertStringDateToNumberOfDay(string date)
         {
             if (date.StartsWith("Mon"))

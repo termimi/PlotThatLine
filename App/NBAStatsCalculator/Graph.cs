@@ -2,13 +2,6 @@
 {
     public class Graph
     {
-        public string name;
-        public double graWidth; // 500
-        public double graHeight; //250
-        public int graLeft = 100;
-        public int graTop = 100;
-        public int graPosX;
-        public int graPosY;
         private ScottPlot.WinForms.FormsPlot globalGraph = new ScottPlot.WinForms.FormsPlot();
         private List<Team> globalTeams = new List<Team>();
         private Form globalForm = new Form();

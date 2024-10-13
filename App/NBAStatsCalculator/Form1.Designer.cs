@@ -38,16 +38,19 @@
             // 
             mainGraph.DisplayScale = 1F;
             mainGraph.Location = new Point(22, 26);
-            mainGraph.Margin = new Padding(6, 6, 6, 6);
+            mainGraph.Margin = new Padding(6);
             mainGraph.Name = "mainGraph";
-            mainGraph.Size = new Size(2238, 943);
+            mainGraph.Size = new Size(2144, 943);
             mainGraph.TabIndex = 0;
             // 
             // mainLayoutPanel
             // 
-            mainLayoutPanel.Location = new Point(2302, 36);
+            mainLayoutPanel.AllowDrop = true;
+            mainLayoutPanel.AutoScroll = true;
+            mainLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            mainLayoutPanel.Location = new Point(2193, 36);
             mainLayoutPanel.Name = "mainLayoutPanel";
-            mainLayoutPanel.Size = new Size(400, 933);
+            mainLayoutPanel.Size = new Size(509, 933);
             mainLayoutPanel.TabIndex = 1;
             mainLayoutPanel.Paint += flowLayoutPanel1_Paint;
             // 
@@ -58,7 +61,7 @@
             ClientSize = new Size(2756, 1837);
             Controls.Add(mainLayoutPanel);
             Controls.Add(mainGraph);
-            Margin = new Padding(6, 6, 6, 6);
+            Margin = new Padding(6);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
