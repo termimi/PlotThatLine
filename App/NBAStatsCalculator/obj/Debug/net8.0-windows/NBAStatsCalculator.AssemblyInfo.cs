@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NBAStatsCalculator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53245bc6289515bd304ba823f997ac2c91833b7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9775597e7781795bc1bc64c3131abb45904e71d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("NBAStatsCalculator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NBAStatsCalculator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

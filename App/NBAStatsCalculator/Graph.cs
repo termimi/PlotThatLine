@@ -1,4 +1,6 @@
-﻿namespace NBAStatsCalculator
+﻿using System.Diagnostics;
+
+namespace NBAStatsCalculator
 {
     public class Graph
     {
@@ -37,7 +39,7 @@
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
                 createScatter(t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Select(ts => (double)ts.score).ToArray(), t.nameOfTeam);
             });
-
+            CreateDisableAllTeamsCheckBox();
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
             globalForm.Controls.Add(globalGraph);
@@ -47,30 +49,53 @@
             string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
             var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
             scatt.LegendText = nameOfTeam;
-            CreateButton(nameOfTeam);
+            CreateTeamCheckBoxes(nameOfTeam);
             globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
         }
-        private void CreateButton(string nameOfScatter)
+        private void CreateTeamCheckBoxes(string nameOfScatter)
         {
-            Button button = new Button();
-            button.Text = nameOfScatter;
-            button.Size = new Size(50, 50);
-            button.Click += new EventHandler(Button_Click);
-
-            globalFlowLayoutPanel.Controls.Add(button);
+            CheckBox checkBox = new CheckBox();
+            checkBox.Name = nameOfScatter;
+            checkBox.Text = nameOfScatter;
+            checkBox.AutoSize = true;
+            checkBox.Checked = true;
+            checkBox.CheckedChanged += new EventHandler(CheckBox_CheckedChanged);
+            
+            globalFlowLayoutPanel.Controls.Add(checkBox);
         }
-        private void Button_Click(object sender, EventArgs e)
+        private void CreateDisableAllTeamsCheckBox()
+        {
+            CheckBox checkBox = new CheckBox();
+            checkBox.Name = "ToutSupprimer";
+            checkBox.Text = "Tout Supprimer";
+            checkBox.AutoSize = true;
+
+            checkBox.CheckedChanged += new EventHandler(Disable_All_Teams);
+
+            globalFlowLayoutPanel.Controls.Add(checkBox);
+        }
+        private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Convertir le sender en Button
-            Button clickedButton = sender as Button;
+            CheckBox changedCheckBox = sender as CheckBox;
             globalGraph.Plot.GetPlottables().ToList().ForEach(scatter =>
             {
-                scatter.IsVisible = false;
-                if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == clickedButton.Text)
+                if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == changedCheckBox.Text)
                 {
                     scatter.IsVisible = !scatter.IsVisible;
                 }
                 globalGraph.Refresh();
+            });
+        }
+        //TODO: Trouver un moyen de rendre le programme moins lent
+        private void Disable_All_Teams(object sender, EventArgs e)
+        {
+            globalFlowLayoutPanel.Controls.Cast<CheckBox>().ToList().ForEach(c =>
+            {
+                if (c.Name != "ToutSupprimer")
+                {
+                    c.Checked = false;
+                } 
             });
         }
 
