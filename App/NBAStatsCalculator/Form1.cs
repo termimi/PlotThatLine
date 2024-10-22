@@ -13,19 +13,18 @@ namespace NBAStatsCalculator
         {
             InitializeComponent();
 
-            Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel);
+            Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel,this.daysFlowLayoutPanel);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile();
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
             graph1.createGraph(listOfTeams);
+            graph1.CreateDaysCheckBox();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 

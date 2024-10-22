@@ -10,15 +10,19 @@ namespace NBAStatsCalculator
         private Form globalForm = new Form();
         private FlowLayoutPanel globalFlowLayoutPanel = new FlowLayoutPanel();
         private bool hasGraphChanged = false;
+        private FlowLayoutPanel globalDaysFlowLayoutPanel = new FlowLayoutPanel();
+        private string[] daysNameArray = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
+        private List<(double dayOfWeekNumber, string dayName)> days = new List<(double dayOfWeekNumber, string dayName)>();
+        private List<(double dayOfWeekNumber, string dayName)> daysToShow = new List<(double dayOfWeekNumber, string dayName)>();
 
-
-        public Graph(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph, FlowLayoutPanel layoutPanel)
+        public Graph(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph, FlowLayoutPanel layoutPanel, FlowLayoutPanel daysLayoutPanel)
         {
             this.globalForm = form;
             this.globalTeams = teams;
             this.globalGraph = graph;
             //Création du flowLayoutPanel
             this.globalFlowLayoutPanel = layoutPanel;
+            this.globalDaysFlowLayoutPanel = daysLayoutPanel;
         }
         /// <summary>
         /// Crée un graph à partir d'une liste d'équipe
@@ -49,8 +53,6 @@ namespace NBAStatsCalculator
         /// <param name="nameOfTeam">Nom de l'équipe</param>
         private void createScatter( double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
         {
-            string[] daysNameArray = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
-            List<(double dayOfWeekNumber, string dayName)> days = new List<(double dayOfWeekNumber, string dayName)>();
             dayOfWeek.ToList().ForEach(d =>
             {
                 days.Add((d, daysNameArray[ (int)d - 1]));
@@ -61,7 +63,6 @@ namespace NBAStatsCalculator
                 pointsOfTeam.Add(nbpointArray[(int)days[i].dayOfWeekNumber -1]);
             }
             var scatt = globalGraph.Plot.Add.Scatter(days.Select(d => d.dayOfWeekNumber).ToArray(), pointsOfTeam.ToArray());
-            List<ScottPlot.Coordinates> scatterPoints = scatt.Data.GetScatterPoints().ToList();
             scatt.LegendText = nameOfTeam;
             CreateTeamCheckBoxes(nameOfTeam);
             globalGraph.Plot.Axes.Bottom.SetTicks(days.Select(d => d.dayOfWeekNumber).ToArray(), days.Select(d => d.dayName).ToArray());
@@ -101,9 +102,7 @@ namespace NBAStatsCalculator
         /// <param name="sender">CheckBox</param>
         /// <param name="e">Evenement (Changement d'états de la checkBox)</param>
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Convertir le sender en Button
-            CheckBox changedCheckBox = sender as CheckBox;
+        {   
             globalGraph.Plot.GetPlottables().ToList().ForEach(scatter =>
             {
                 if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == changedCheckBox.Text)
@@ -129,6 +128,56 @@ namespace NBAStatsCalculator
                     c.Checked = ! c.Checked;
                 } 
             });
+        }
+        public void CreateDaysCheckBox()
+        {
+            daysNameArray.ToList().ForEach(d =>
+            {
+                CheckBox dayCheckBox = new CheckBox();
+                dayCheckBox.Name = d;
+                dayCheckBox.Text = d;
+                dayCheckBox.AutoSize = true;
+                dayCheckBox.Checked = true;
+                dayCheckBox.CheckedChanged += new EventHandler(DaysCheckBox_CheckedChanged);
+
+                globalDaysFlowLayoutPanel.Controls.Add(dayCheckBox);
+            });
+        }
+        private void DaysCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            daysToShow.Clear();
+            CheckBox changedCheckBox = sender as CheckBox;
+            globalGraph.Plot.GetPlottables().ToList().ForEach(s =>
+            {
+                if(s is ScottPlot.Plottables.Scatter scatter)
+                {
+                    List<ScottPlot.Coordinates> scatterPoints = scatter.Data.GetScatterPoints().ToList();
+                    scatterPoints.ForEach(sp =>
+                    {
+                       if(sp.X == days.Select(d => d.dayOfWeekNumber).SingleOrDefault() && !changedCheckBox.Checked)
+                       {
+                            globalGraph.Plot.Clear();
+                            days.ForEach(d =>
+                            {
+                                if (sp.X != d.dayOfWeekNumber)
+                                {
+                                    daysToShow.Add(d);
+                                }
+                            });
+                       }
+                        else
+                        {
+                            globalGraph.Plot.Clear();
+                            days.ForEach(d =>
+                            {
+                                if(d.dayName == changedCheckBox.Text)
+                                    daysToShow.Add(d);
+                            });
+                        }
+                    });
+                }
+            });
+            
         }
 
 

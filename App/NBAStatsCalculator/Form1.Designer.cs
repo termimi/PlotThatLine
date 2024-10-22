@@ -32,6 +32,9 @@
             timer1 = new System.Windows.Forms.Timer(components);
             mainGraph = new ScottPlot.WinForms.FormsPlot();
             mainLayoutPanel = new FlowLayoutPanel();
+            label1 = new Label();
+            label2 = new Label();
+            daysFlowLayoutPanel = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // mainGraph
@@ -48,17 +51,45 @@
             mainLayoutPanel.AllowDrop = true;
             mainLayoutPanel.AutoScroll = true;
             mainLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            mainLayoutPanel.Location = new Point(2193, 36);
+            mainLayoutPanel.Location = new Point(2201, 149);
             mainLayoutPanel.Name = "mainLayoutPanel";
-            mainLayoutPanel.Size = new Size(509, 933);
+            mainLayoutPanel.Size = new Size(509, 654);
             mainLayoutPanel.TabIndex = 1;
             mainLayoutPanel.Paint += flowLayoutPanel1_Paint;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(2201, 88);
+            label1.Name = "label1";
+            label1.Size = new Size(173, 32);
+            label1.TabIndex = 2;
+            label1.Text = "Filtrage Equipe";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(2201, 817);
+            label2.Name = "label2";
+            label2.Size = new Size(145, 32);
+            label2.TabIndex = 3;
+            label2.Text = "Filtrage Jour";
+            // 
+            // daysFlowLayoutPanel
+            // 
+            daysFlowLayoutPanel.Location = new Point(2201, 852);
+            daysFlowLayoutPanel.Name = "daysFlowLayoutPanel";
+            daysFlowLayoutPanel.Size = new Size(509, 117);
+            daysFlowLayoutPanel.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2756, 1837);
+            Controls.Add(daysFlowLayoutPanel);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(mainLayoutPanel);
             Controls.Add(mainGraph);
             Margin = new Padding(6);
@@ -66,6 +97,7 @@
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -73,5 +105,8 @@
         private System.Windows.Forms.Timer timer1;
         private ScottPlot.WinForms.FormsPlot mainGraph;
         private FlowLayoutPanel mainLayoutPanel;
+        private Label label1;
+        private Label label2;
+        private FlowLayoutPanel daysFlowLayoutPanel;
     }
 }
