@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace NBAStatsCalculator
 {
@@ -46,13 +47,24 @@ namespace NBAStatsCalculator
         /// <param name="dayOfWeek">Numéros du jour de la semaine</param>
         /// <param name="nbpointArray">Moyenne de point de l'équipe en fonction du jour</param>
         /// <param name="nameOfTeam">Nom de l'équipe</param>
-        private void createScatter(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
+        private void createScatter( double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
         {
-            string[] days = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
-            var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
+            string[] daysNameArray = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
+            List<(double dayOfWeekNumber, string dayName)> days = new List<(double dayOfWeekNumber, string dayName)>();
+            dayOfWeek.ToList().ForEach(d =>
+            {
+                days.Add((d, daysNameArray[ (int)d - 1]));
+            });
+            List<double> pointsOfTeam = new List<double>();
+            for(int i = 0; i< days.Count; i++)
+            {
+                pointsOfTeam.Add(nbpointArray[(int)days[i].dayOfWeekNumber -1]);
+            }
+            var scatt = globalGraph.Plot.Add.Scatter(days.Select(d => d.dayOfWeekNumber).ToArray(), pointsOfTeam.ToArray());
+            List<ScottPlot.Coordinates> scatterPoints = scatt.Data.GetScatterPoints().ToList();
             scatt.LegendText = nameOfTeam;
             CreateTeamCheckBoxes(nameOfTeam);
-            globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, days);
+            globalGraph.Plot.Axes.Bottom.SetTicks(days.Select(d => d.dayOfWeekNumber).ToArray(), days.Select(d => d.dayName).ToArray());
         }
         /// <summary>
         /// Crée une checkBox pour une équipe
