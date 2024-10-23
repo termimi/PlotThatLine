@@ -64,7 +64,9 @@ namespace NBAStatsCalculator
         {
             var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
             scatt.LegendText = nameOfTeam;
-            CreateTeamCheckBoxes(nameOfTeam);
+            // Evite la redondance des checkBox (31 = le nombre d'equipe + le bouton tout supprimer)
+            if(globalFlowLayoutPanel.Controls.Count < 31)
+                CreateTeamCheckBoxes(nameOfTeam);
             globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, daysToShow.Select(d => d.dayName).ToArray());
         }
         /// <summary>
