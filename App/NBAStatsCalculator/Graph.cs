@@ -11,7 +11,7 @@ namespace NBAStatsCalculator
         private FlowLayoutPanel globalFlowLayoutPanel = new FlowLayoutPanel();
         private bool hasGraphChanged = false;
         private FlowLayoutPanel globalDaysFlowLayoutPanel = new FlowLayoutPanel();
-        private string[] daysNameArray = { "lundi", "mardi", "mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche" };
+        private string[] daysNameArray = { "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
         private List<(double dayOfWeekNumber, string dayName)> days = new List<(double dayOfWeekNumber, string dayName)>();
         private List<(double dayOfWeekNumber, string dayName)> daysToShow = new List<(double dayOfWeekNumber, string dayName)>();
 
@@ -23,6 +23,14 @@ namespace NBAStatsCalculator
             //Création du flowLayoutPanel
             this.globalFlowLayoutPanel = layoutPanel;
             this.globalDaysFlowLayoutPanel = daysLayoutPanel;
+            days.Add((1, "lundi"));
+            days.Add((2, "mardi"));
+            days.Add((3, "mercredi"));
+            days.Add((4, "jeudi"));
+            days.Add((5, "vendredi"));
+            days.Add((6, "samedi"));
+            days.Add((7, "dimanche"));
+            daysToShow = days;
         }
         /// <summary>
         /// Crée un graph à partir d'une liste d'équipe
@@ -30,6 +38,7 @@ namespace NBAStatsCalculator
         /// <param name="teams">liste d'équipe</param>
         public void createGraph(List<Team> teams)
         {
+            this.globalTeams = teams;
             // Label du graph
             globalGraph.Plot.XLabel("Jour de la semaine");
             globalGraph.Plot.YLabel("Nombre de points");
@@ -37,7 +46,7 @@ namespace NBAStatsCalculator
             teams.ForEach(t =>
             {
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                createScatter(t.teamScores.Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Select(ts => (double)ts.score).ToArray(), t.nameOfTeam);
+                createScatter(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam);
             });
             // Crée la check box permettant de désafficher toutes les équipes
             CreateDisableAllTeamsCheckBox();
@@ -51,21 +60,12 @@ namespace NBAStatsCalculator
         /// <param name="dayOfWeek">Numéros du jour de la semaine</param>
         /// <param name="nbpointArray">Moyenne de point de l'équipe en fonction du jour</param>
         /// <param name="nameOfTeam">Nom de l'équipe</param>
-        private void createScatter( double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
+        private void createScatter(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
         {
-            dayOfWeek.ToList().ForEach(d =>
-            {
-                days.Add((d, daysNameArray[ (int)d - 1]));
-            });
-            List<double> pointsOfTeam = new List<double>();
-            for(int i = 0; i< days.Count; i++)
-            {
-                pointsOfTeam.Add(nbpointArray[(int)days[i].dayOfWeekNumber -1]);
-            }
-            var scatt = globalGraph.Plot.Add.Scatter(days.Select(d => d.dayOfWeekNumber).ToArray(), pointsOfTeam.ToArray());
+            var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
             scatt.LegendText = nameOfTeam;
             CreateTeamCheckBoxes(nameOfTeam);
-            globalGraph.Plot.Axes.Bottom.SetTicks(days.Select(d => d.dayOfWeekNumber).ToArray(), days.Select(d => d.dayName).ToArray());
+            globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, daysToShow.Select(d => d.dayName).ToArray());
         }
         /// <summary>
         /// Crée une checkBox pour une équipe
@@ -79,7 +79,7 @@ namespace NBAStatsCalculator
             checkBox.AutoSize = true;
             checkBox.Checked = true;
             checkBox.CheckedChanged += new EventHandler(CheckBox_CheckedChanged);
-            
+
             globalFlowLayoutPanel.Controls.Add(checkBox);
         }
         /// <summary>
@@ -102,7 +102,8 @@ namespace NBAStatsCalculator
         /// <param name="sender">CheckBox</param>
         /// <param name="e">Evenement (Changement d'états de la checkBox)</param>
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
-        {   
+        {
+            CheckBox changedCheckBox = sender as CheckBox;
             globalGraph.Plot.GetPlottables().ToList().ForEach(scatter =>
             {
                 if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == changedCheckBox.Text)
@@ -125,8 +126,8 @@ namespace NBAStatsCalculator
             {
                 if (c.Name != "ToutSupprimer")
                 {
-                    c.Checked = ! c.Checked;
-                } 
+                    c.Checked = !c.Checked;
+                }
             });
         }
         public void CreateDaysCheckBox()
@@ -145,39 +146,20 @@ namespace NBAStatsCalculator
         }
         private void DaysCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            daysToShow.Clear();
+            List<(double dayOfWeekNumber, string dayName)> daysChecked = new List<(double dayOfWeekNumber, string dayName)>();
             CheckBox changedCheckBox = sender as CheckBox;
-            globalGraph.Plot.GetPlottables().ToList().ForEach(s =>
+            globalDaysFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().ForEach(c =>
             {
-                if(s is ScottPlot.Plottables.Scatter scatter)
+                if (c.Checked)
                 {
-                    List<ScottPlot.Coordinates> scatterPoints = scatter.Data.GetScatterPoints().ToList();
-                    scatterPoints.ForEach(sp =>
-                    {
-                       if(sp.X == days.Select(d => d.dayOfWeekNumber).SingleOrDefault() && !changedCheckBox.Checked)
-                       {
-                            globalGraph.Plot.Clear();
-                            days.ForEach(d =>
-                            {
-                                if (sp.X != d.dayOfWeekNumber)
-                                {
-                                    daysToShow.Add(d);
-                                }
-                            });
-                       }
-                        else
-                        {
-                            globalGraph.Plot.Clear();
-                            days.ForEach(d =>
-                            {
-                                if(d.dayName == changedCheckBox.Text)
-                                    daysToShow.Add(d);
-                            });
-                        }
-                    });
+                    daysChecked.Add((days
+                        .Where(d => d.dayName == c.Text)
+                        .Select(d => d.dayOfWeekNumber).Single(), c.Text));
                 }
             });
-            
+            daysToShow = daysChecked;
+            globalGraph.Plot.Clear();
+            createGraph(this.globalTeams);
         }
 
 
