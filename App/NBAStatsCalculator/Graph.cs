@@ -31,6 +31,8 @@ namespace NBAStatsCalculator
             days.Add((6, "samedi"));
             days.Add((7, "dimanche"));
             daysToShow = days;
+            // Crée la check box permettant de désafficher toutes les équipes
+            CreateDisableAllTeamsCheckBox();
         }
         /// <summary>
         /// Crée un graph à partir d'une liste d'équipe
@@ -48,8 +50,6 @@ namespace NBAStatsCalculator
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
                 createScatter(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam);
             });
-            // Crée la check box permettant de désafficher toutes les équipes
-            CreateDisableAllTeamsCheckBox();
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
             globalForm.Controls.Add(globalGraph);
