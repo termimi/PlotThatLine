@@ -40,6 +40,7 @@ namespace NBAStatsCalculator
         /// <param name="teams">liste d'équipe</param>
         public void createGraph(List<Team> teams)
         {
+            double i = 0;
             this.globalTeams = teams;
             // Label du graph
             globalGraph.Plot.XLabel("Jour de la semaine");
@@ -48,8 +49,10 @@ namespace NBAStatsCalculator
             teams.ForEach(t =>
             {
                 t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                createScatter(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam);
+                createPlot(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam,i);
+                i++;
             });
+            i = 0;
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
             globalForm.Controls.Add(globalGraph);
@@ -60,10 +63,18 @@ namespace NBAStatsCalculator
         /// <param name="dayOfWeek">Numéros du jour de la semaine</param>
         /// <param name="nbpointArray">Moyenne de point de l'équipe en fonction du jour</param>
         /// <param name="nameOfTeam">Nom de l'équipe</param>
-        private void createScatter(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam)
+        private void createPlot(double[] dayOfWeek, double[] nbpointArray, string nameOfTeam,double indexOfTeam)
         {
-            var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
-            scatt.LegendText = nameOfTeam;
+            if(dayOfWeek.Length > 1)
+            {
+                var scatt = globalGraph.Plot.Add.Scatter(dayOfWeek, nbpointArray);
+                scatt.LegendText = nameOfTeam;
+            }
+            else
+            {
+                var coloumn = globalGraph.Plot.Add.Bar(indexOfTeam, nbpointArray[0]);
+                coloumn.LegendText = nameOfTeam;
+            }
             // Evite la redondance des checkBox (31 = le nombre d'equipe + le bouton tout supprimer)
             if(globalFlowLayoutPanel.Controls.Count < 31)
                 CreateTeamCheckBoxes(nameOfTeam);
