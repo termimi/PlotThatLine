@@ -1,0 +1,5 @@
+Liste des changements/refactores à apporter au code
+
+//TODO: Refactore pour que le code de la methode UpdatesTeamsVisibility et la methode CheckBox_CheckedChanged ne soit plus redondant
+//TODO: Passer la methode createPlot en fonction supérieur et adapter la création d'une bar ou d'un scatter en avec un parametre Action
+//TODO: Isoler totalement la création des checkboxes de la class Graph.cs
