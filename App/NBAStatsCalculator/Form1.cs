@@ -13,14 +13,6 @@ namespace NBAStatsCalculator
         public Form1()
         {
             InitializeComponent();
-
-            Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel, this.daysFlowLayoutPanel);
-            DataSelection data = new DataSelection("", "", "", 0, "", 0);
-            data.loadFile();
-            listOfTeams = data.GetTeamStructure();
-            listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
-            graph1.createGraph(listOfTeams);
-            graph1.CreateDaysCheckBox();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -49,7 +41,20 @@ namespace NBAStatsCalculator
             {
                 // Récupérer le chemin du fichier sélectionné
                 filePath = openFileDialog.FileName;
+                loadGraphic();
             }
+        }
+        private void loadGraphic()
+        {
+            Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel, this.daysFlowLayoutPanel);
+            DataSelection data = new DataSelection("", "", "", 0, "", 0);
+            data.loadFile(filePath);
+            listOfTeams = data.GetTeamStructure();
+            listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
+            graph1.createGraph(listOfTeams);
+            graph1.CreateDaysCheckBox();
+            this.mainGraph.Plot.Axes.AutoScale();
+            this.mainGraph.Refresh();
         }
     }
 }

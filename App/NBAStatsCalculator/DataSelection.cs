@@ -33,12 +33,10 @@ namespace NBAStatsCalculator
         /// <summary>
         /// Lis le contenu du fichier
         /// </summary>
-        public void loadFile()
+        public void loadFile(string filePath)
         {
             /*string appPath = AppDomain.CurrentDomain.BaseDirectory;
             string filePath = Path.Combine(appPath, "TeamData", "TeamData.json");*/
-            string filePath = @"../../../teamData.json";
-
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
