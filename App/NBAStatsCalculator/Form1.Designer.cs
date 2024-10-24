@@ -35,6 +35,7 @@
             label1 = new Label();
             label2 = new Label();
             daysFlowLayoutPanel = new FlowLayoutPanel();
+            openFileControlButton = new Button();
             SuspendLayout();
             // 
             // mainGraph
@@ -45,6 +46,7 @@
             mainGraph.Name = "mainGraph";
             mainGraph.Size = new Size(2144, 943);
             mainGraph.TabIndex = 0;
+            mainGraph.Load += mainGraph_Load;
             // 
             // mainLayoutPanel
             // 
@@ -82,11 +84,22 @@
             daysFlowLayoutPanel.Size = new Size(509, 117);
             daysFlowLayoutPanel.TabIndex = 4;
             // 
+            // openFileControlButton
+            // 
+            openFileControlButton.Location = new Point(58, 1014);
+            openFileControlButton.Name = "openFileControlButton";
+            openFileControlButton.Size = new Size(296, 46);
+            openFileControlButton.TabIndex = 5;
+            openFileControlButton.Text = "Choisir un fichier";
+            openFileControlButton.UseVisualStyleBackColor = true;
+            openFileControlButton.Click += openFileControlButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2756, 1837);
+            Controls.Add(openFileControlButton);
             Controls.Add(daysFlowLayoutPanel);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -108,5 +121,6 @@
         private Label label1;
         private Label label2;
         private FlowLayoutPanel daysFlowLayoutPanel;
+        private Button openFileControlButton;
     }
 }
