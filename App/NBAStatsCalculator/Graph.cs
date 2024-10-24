@@ -56,6 +56,7 @@ namespace NBAStatsCalculator
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
             globalForm.Controls.Add(globalGraph);
+            UpdatesTeamsVisibility();
         }
         /// <summary>
         /// Crée une ligne dans le graph pour avec les information d'une équipe
@@ -122,8 +123,9 @@ namespace NBAStatsCalculator
                 if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == changedCheckBox.Text)
                 {
                     scatter.IsVisible = !scatter.IsVisible;
+                    globalGraph.Refresh();
                 }
-                globalGraph.Refresh();
+                
             });
         }
         //TODO: Trouver un moyen de rendre le programme moins lent
@@ -173,6 +175,22 @@ namespace NBAStatsCalculator
             daysToShow = daysChecked;
             globalGraph.Plot.Clear();
             createGraph(this.globalTeams);
+        }
+        private void UpdatesTeamsVisibility()
+        {
+            //TODO: Refactore pour que le code de cette methode et la methode CheckBox_CheckedChanged ne soit plus redondant
+            globalFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().Where(c => !c.Checked).ToList().ForEach(c =>
+            {
+                globalGraph.Plot.GetPlottables().ToList().ForEach(scatter =>
+                {
+                    if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == c.Text)
+                    {
+                        scatter.IsVisible = !scatter.IsVisible;
+                        globalGraph.Refresh();
+                    }
+                    
+                });
+            });
         }
 
 
