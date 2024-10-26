@@ -12,7 +12,9 @@ namespace NBAStatsCalculator
         private bool hasGraphChanged = false;
         private FlowLayoutPanel globalDaysFlowLayoutPanel = new FlowLayoutPanel();
         private string[] daysNameArray = { "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
+        // Liste contenant les 7 jours de la semaine ainsi que leur identifiant
         private List<(double dayOfWeekNumber, string dayName)> days = new List<(double dayOfWeekNumber, string dayName)>();
+        // Liste des jour a afficher dans le graph et leur identifiant
         private List<(double dayOfWeekNumber, string dayName)> daysToShow = new List<(double dayOfWeekNumber, string dayName)>();
 
         public Graph(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph, FlowLayoutPanel layoutPanel, FlowLayoutPanel daysLayoutPanel)
@@ -23,6 +25,7 @@ namespace NBAStatsCalculator
             //Création du flowLayoutPanel
             this.globalFlowLayoutPanel = layoutPanel;
             this.globalDaysFlowLayoutPanel = daysLayoutPanel;
+            // Ajout des jours et leurs identifiant
             days.Add((1, "lundi"));
             days.Add((2, "mardi"));
             days.Add((3, "mercredi"));
@@ -56,6 +59,7 @@ namespace NBAStatsCalculator
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
             globalForm.Controls.Add(globalGraph);
+            //TODO: Ne faire appel a cette methode que si nécessaire (uniquement si les il n'y pas 7 jour à afficher et que certaines équipe sont déchoché)
             UpdatesTeamsVisibility();
         }
         /// <summary>
@@ -99,6 +103,7 @@ namespace NBAStatsCalculator
         /// <summary>
         /// Crée le bouton permettant de tout supprimer
         /// </summary>
+        /// TODO: Déplacer la methode afin de la créer dans la classe FORM
         private void CreateDisableAllTeamsCheckBox()
         {
             CheckBox checkBox = new CheckBox();
@@ -122,6 +127,7 @@ namespace NBAStatsCalculator
             {
                 if (scatter.LegendItems.Select(s => s.LabelText).FirstOrDefault().ToString() == changedCheckBox.Text)
                 {
+                    // Inverse la visibilité de la ligne 
                     scatter.IsVisible = !scatter.IsVisible;
                     globalGraph.Refresh();
                 }
@@ -145,6 +151,10 @@ namespace NBAStatsCalculator
                 }
             });
         }
+        /// <summary>
+        /// Crée les checkbox permettant de choisir les jours à afficher
+        /// </summary>
+        /// TODO: Déplacer la methode afin de la créer dans la classe FORM
         public void CreateDaysCheckBox()
         {
             daysNameArray.ToList().ForEach(d =>
@@ -172,13 +182,19 @@ namespace NBAStatsCalculator
                         .Select(d => d.dayOfWeekNumber).Single(), c.Text));
                 }
             });
+            // modifie la liste des jour à afficher
             daysToShow = daysChecked;
+            // CRéation des nouvelles ligne
             globalGraph.Plot.Clear();
             createGraph(this.globalTeams);
         }
+        /// <summary>
+        /// Désaffiche les équipes décoché apprés avoir filtrer sur les jours
+        /// </summary>
         private void UpdatesTeamsVisibility()
         {
             //TODO: Refactore pour que le code de cette methode et la methode CheckBox_CheckedChanged ne soit plus redondant
+            //Liste des équipe à ne pas afficher
             globalFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().Where(c => !c.Checked).ToList().ForEach(c =>
             {
                 globalGraph.Plot.GetPlottables().ToList().ForEach(scatter =>
