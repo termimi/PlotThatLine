@@ -49,12 +49,19 @@ namespace NBAStatsCalculator
             globalGraph.Plot.XLabel("Jour de la semaine");
             globalGraph.Plot.YLabel("Nombre de points");
             //Crée une ligne pour chaque équipe
-            teams.ForEach(t =>
+            if(daysToShow.Count >=1)
             {
-                t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                createPlot(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam,i);
-                i++;
-            });
+                teams.ForEach(t =>
+                {
+                    t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
+                    createPlot(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam, i);
+                    i++;
+                });
+            }
+            else
+            {
+                return;
+            }
             i = 0;
             // Rafraîchissement et ajout au form
             globalGraph.Refresh();
@@ -77,6 +84,7 @@ namespace NBAStatsCalculator
             }
             else
             {
+                //TODO:Changer les labels de l'axe X pour inclure le nom des équipes
                 var coloumn = globalGraph.Plot.Add.Bar(indexOfTeam, nbpointArray[0]);
                 coloumn.LegendText = nameOfTeam;
             }
