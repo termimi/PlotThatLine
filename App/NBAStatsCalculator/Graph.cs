@@ -84,6 +84,7 @@ namespace NBAStatsCalculator
             if(globalFlowLayoutPanel.Controls.Count < 31)
                 CreateTeamCheckBoxes(nameOfTeam);
             globalGraph.Plot.Axes.Bottom.SetTicks(dayOfWeek, daysToShow.Select(d => d.dayName).ToArray());
+            globalGraph.Plot.Axes.AutoScale();
         }
         /// <summary>
         /// Crée une checkBox pour une équipe

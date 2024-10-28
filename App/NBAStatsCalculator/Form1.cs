@@ -53,7 +53,6 @@ namespace NBAStatsCalculator
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
             graph1.createGraph(listOfTeams);
             graph1.CreateDaysCheckBox();
-            this.mainGraph.Plot.Axes.AutoScale();
             this.mainGraph.Refresh();
         }
     }
