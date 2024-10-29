@@ -12,15 +12,7 @@ namespace NBAStatsCalculator.Tests
     [TestClass()]
     public class Form1Tests
     {
-        [TestMethod()]
-        public void loadGraphicTest()
-        {
-            ///Arange
-           
-            ///Act
-
-            ///Assert
-            Assert.Fail();
-        }
+        
+        
     }
 }
