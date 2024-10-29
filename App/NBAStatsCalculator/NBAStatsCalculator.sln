@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBAStatsCalculator", "NBAStatsCalculator.csproj", "{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBAStatsCalculator", "NBAStatsCalculator.csproj", "{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBAStatsCalculatorTests", "..\NBAStatsCalculatorTests\NBAStatsCalculatorTests.csproj", "{770E912C-4D27-4F64-8C9F-E383231A7051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22EC39FE-9F90-42E4-B210-6C1B3F7FFAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{770E912C-4D27-4F64-8C9F-E383231A7051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770E912C-4D27-4F64-8C9F-E383231A7051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770E912C-4D27-4F64-8C9F-E383231A7051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770E912C-4D27-4F64-8C9F-E383231A7051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

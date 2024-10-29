@@ -15,7 +15,7 @@ namespace NBAStatsCalculator
         // Liste contenant les 7 jours de la semaine ainsi que leur identifiant
         private List<(double dayOfWeekNumber, string dayName)> days = new List<(double dayOfWeekNumber, string dayName)>();
         // Liste des jour a afficher dans le graph et leur identifiant
-        private List<(double dayOfWeekNumber, string dayName)> daysToShow = new List<(double dayOfWeekNumber, string dayName)>();
+        public List<(double dayOfWeekNumber, string dayName)> daysToShow = new List<(double dayOfWeekNumber, string dayName)>();
 
         public Graph(Form form, List<Team> teams, ScottPlot.WinForms.FormsPlot graph, FlowLayoutPanel layoutPanel, FlowLayoutPanel daysLayoutPanel)
         {

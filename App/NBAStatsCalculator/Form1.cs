@@ -44,7 +44,7 @@ namespace NBAStatsCalculator
                 loadGraphic();
             }
         }
-        private void loadGraphic()
+        public void loadGraphic()
         {
             Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel, this.daysFlowLayoutPanel);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
