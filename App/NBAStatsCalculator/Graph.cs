@@ -56,7 +56,18 @@ namespace NBAStatsCalculator
                 teams.ForEach(t =>
                 {
                     t.teamScores = t.teamScores.OrderBy(ts => ts.numberOfDay).ToList();
-                    createPlot(t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.numberOfDay).ToArray(), t.teamScores.Where(ts => daysToShow.Select(d => (double)d.dayOfWeekNumber).Contains(ts.numberOfDay)).Select(ts => (double)ts.score).ToArray(), t.nameOfTeam, i);
+                    createPlot(t.teamScores
+                        .Where(ts => daysToShow
+                        .Select(d => (double)d.dayOfWeekNumber)
+                        .Contains(ts.numberOfDay))
+                        .Select(ts => (double)ts.numberOfDay)
+                        .ToArray(), 
+                        t.teamScores
+                        .Where(ts => daysToShow
+                        .Select(d => (double)d.dayOfWeekNumber)
+                        .Contains(ts.numberOfDay))
+                        .Select(ts => (double)ts.score)
+                        .ToArray(), t.nameOfTeam, i);
                     i++;
                 });
             }

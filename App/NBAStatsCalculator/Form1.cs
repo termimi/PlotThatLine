@@ -47,6 +47,7 @@ namespace NBAStatsCalculator
         public void loadGraphic()
         {
             //TODO: Refactor afin de ne plus avoir besoin de clear avant de créer le graph
+            this.mainLayoutPanel.Controls.Clear();
             this.mainGraph.Plot.Clear();
             Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel, this.daysFlowLayoutPanel);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
