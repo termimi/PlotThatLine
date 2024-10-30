@@ -46,13 +46,16 @@ namespace NBAStatsCalculator
         }
         public void loadGraphic()
         {
+            //TODO: Refactor afin de ne plus avoir besoin de clear avant de créer le graph
+            this.mainGraph.Plot.Clear();
             Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel, this.daysFlowLayoutPanel);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
             data.loadFile(filePath);
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
             graph1.createGraph(listOfTeams);
-            graph1.CreateDaysCheckBox();
+            if(daysFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().Count() == 0)
+                graph1.CreateDaysCheckBox();
             this.mainGraph.Refresh();
         }
     }

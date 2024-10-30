@@ -35,7 +35,9 @@ namespace NBAStatsCalculator
             days.Add((7, "dimanche"));
             daysToShow = days;
             // Crée la check box permettant de désafficher toutes les équipes
-            CreateDisableAllTeamsCheckBox();
+            //TODO: déplacer la méthode afin de ne plus avoir besoin du if
+            if(globalFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().Count() == 0)
+                CreateDisableAllTeamsCheckBox();
         }
         /// <summary>
         /// Crée un graph à partir d'une liste d'équipe
