@@ -57,7 +57,7 @@ namespace NBAStatsCalculator
             }
             catch (Exception ex)
             {
-                 MessageBox.Show("Les données du fichier chargé ne sont pas au bon format, veuillez voir le fichier exemple sur répertoire git erreur: " + ex.Message, "Erreur de ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 MessageBox.Show("Les données du fichier chargé ne sont pas au bon format, veuillez voir le fichier exemple sur répertoire GitHub (https://github.com/termimi/PlotThatLine/tree/main/DataSets) erreur: " + ex.Message, "Erreur de ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
