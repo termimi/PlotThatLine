@@ -41,11 +41,35 @@ namespace NBAStatsCalculator
             {
                 string json = File.ReadAllText(filePath);
                 dynamic data = JsonConvert.DeserializeObject<dynamic>(json);
-                foreach (var item in data)
+                try
                 {
-                    DataSelection dataInList = new DataSelection((string)item.Date, (string)item.Start, (string)item.Visitor, (int)item.VPTS, (string)item.Home, (int)item.HPTS);
-                    list.Add(dataInList);
+                    if(data == null)
+                    {
+                        throw new Exception("Le fichier JSON est vide");
+                    }
+                    else
+                    {
+                        try
+                        {
+                            foreach (var item in data)
+                            {
+                                DataSelection dataInList = new DataSelection((string)item.Date, (string)item.Start, (string)item.Visitor, (int)item.VPTS, (string)item.Home, (int)item.HPTS);
+                                list.Add(dataInList);
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            throw ex;
+                        }
+                        
+                    }
                 }
+                catch
+                {
+                    // donne l'erreur au try catch du form
+                    throw;
+                }
+                
             }
         }
         /// <summary>

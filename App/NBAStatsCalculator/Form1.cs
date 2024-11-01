@@ -51,13 +51,22 @@ namespace NBAStatsCalculator
             this.mainGraph.Plot.Clear();
             Graph graph1 = new Graph(this, listOfTeams, this.mainGraph, this.mainLayoutPanel, this.daysFlowLayoutPanel);
             DataSelection data = new DataSelection("", "", "", 0, "", 0);
-            data.loadFile(filePath);
+            try
+            {
+                data.loadFile(filePath);
+            }
+            catch (Exception ex)
+            {
+                 MessageBox.Show("Les données du fichier chargé ne sont pas au bon format, veuillez voir le fichier exemple sur répertoire git erreur: " + ex.Message, "Erreur de ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             listOfTeams = data.GetTeamStructure();
             listOfTeams = data.GetAverageOfAllTeamScore(listOfTeams);
             graph1.createGraph(listOfTeams);
-            if(daysFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().Count() == 0)
+            if (daysFlowLayoutPanel.Controls.OfType<CheckBox>().ToList().Count() == 0)
                 graph1.CreateDaysCheckBox();
             this.mainGraph.Refresh();
+           
+
         }
     }
 }
